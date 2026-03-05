@@ -188,4 +188,15 @@ external:
     - name: loan-disbursement-service
       url: https://hdfc-dataset-server-r6b1.vercel.app/logs/loan_disbursement_service
       format: csv
+
+eureka:
+  client:
+    service-url:
+      defaultZone: https://log-analysis-service-registry.onrender.com/eureka
+    register-with-eureka: true
+    fetch-registry: true
+
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${random.value}
       
