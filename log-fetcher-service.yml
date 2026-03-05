@@ -42,11 +42,23 @@ spring:
       sqs:
         queue-url: https://sqs.us-east-1.amazonaws.com/206555216689/log-ingestion-queue  
 
+
   # Disable Spring Boot auto-config for services not in use
   autoconfigure:
     exclude:
       - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
 
+eureka:
+  client:
+    service-url:
+      defaultZone: https://log-analysis-service-registry.onrender.com/eureka
+    register-with-eureka: true
+    fetch-registry: true
+
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${random.value}
+    
 # ─── Scheduler ────────────────────────────────────────────────────────────────
 log:
   scheduler:
