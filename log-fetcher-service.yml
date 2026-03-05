@@ -1,10 +1,13 @@
 server:
   port: 8080
+  
 
 spring:
   web:
     resources:
       add-mappings: false
+  application: 
+    name: log-fetcher-service    
 
   data:
     redis:
@@ -36,34 +39,25 @@ spring:
       region: 
         static: us-east-1
       credentials:
-        access-key: ASIATAF5GPMYQZNLOVAE
-        secret-key: GkNQd5BS+5LQDu5Hy+PVLcNRzzru7nm5l1vVukMk
-        session-token: IQoJb3JpZ2luX2VjELj//////////wEaCXVzLXdlc3QtMiJIMEYCIQDlmYrU/fEu1qlxcLRwMzzvT3O/8iZfHTxQUmy8Dw2U4QIhAJ3l6/TKFcIBI+Quk73XDfCRbzbWHoCBZk58OzbPcoRcKrwCCIH//////////wEQABoMMjA2NTU1MjE2Njg5Igwv8etjY9ekVcDzHn4qkAK5QIE3JfTndMKkB7qSkZFfBlJbhsdKplSmu6gSDPnBAHL/nXp6cnKfduRxpsM1/x1BdIVoZvTq/TIKNIzzi+kCWf8ngaxVIdPzPjjKYhPKFtO/Rl6TTtmvqdfYElO5aby8DE/Rkqzh95H+07h/rl1qCCn51AVpgC6eqNqYQdQCYcNCTbMtCJr/g6BuEFgULsIWf8lTSK83PT/UjoAMAABvF+ne/fbsr+rTJuzNebJw8BOLWruyBkLV6Lzu0EEk+X/QJjOWIN+pyfb2znQDTKcCXHFAUcAjGEIcjmG44ihY0OdOL48HXgzd1BFHMDgQy/Z4Ip0UD338o7DGk8RXRjRZvKxvOqsk47Pmj3V1LO7mVjCb9ZTNBjqcAUHSnhVHGJ12tDW8lz/MI3WeTkTcqUAvC8piQ+xn033XxTGWOZmzfg+wxcQMPT9FsaMiTfMEF8BXKQTdslq1nxsI+rDFF3WTrYqzARpMj2zWj8ZemWiHwKEFn7DKbPKOzMz9Qz0juHrBnObxC8v4HmauHTsF8OKl8ZI8L+WhTD9xWRZjjjEmLhwZVtnk1jPp2WoTupHLJ6GGQeaOqQ==
+        access-key: ASIATAF5GPMYYONIANAQ
+        secret-key: tZqo3xGMVqcBL6J+dTTiSpqSwdm3mXRLKU+PNJnL
+        session-token: IQoJb3JpZ2luX2VjEPP//////////wEaCXVzLXdlc3QtMiJHMEUCIQCLG1G+OSDc9MhCushnlDltyjHT6mo2Ako9ef5uPLWCZgIgcoU2iHC/MnAys+bxgXlT0ftcRhJy8NvD0L/QRzIG08UqvAIIvP//////////ARAAGgwyMDY1NTUyMTY2ODkiDEjhYhG4iFK7V/0lqCqQAhNf/M4yEUB0aViJQ2akNiGr216Whv9vo1OT3UuyVjKWFZY+5aAOYBsT9ZQsUjxgP0bS1jtvdZWzMpQv21lLZdDdpaTsHI7pBfByi86uDKmk2EQllc9nGtvOUF5SXxHO9ic292FowkoB/6Lj7DVYWeBmxl5JE5K2uGskmLVbtwS8jCOXaqAz2Tu3kplneIrAildavD8ZA9dE5J0btDQLM+aY3nAaaE6+BtGsgbPlot5Wav0IJXkb8nSupouko0R/raUzTQjDnPqPTwh66bPepkSPsMNP9rvpNqBSlpKJpRNdWaJKnjNcYkcES2EYP470azCfbDZaqlPSP4UMuq51ueJZz2JJdnTjVGrDn+kEbGWAMP6Ios0GOp0Bo6XNteWInp5CaZLBfbGTn9dNlZK67Yao5QZfmfGIX1uDmUW6gphbOyjU7U+cjI1h+ovszYkXjCeY3MHD70YrwoOgR7LsyMbAExXhSDCmoW9/XPCkFxCyx8uzMoytCH9tMBeuqE0oJZnEyd6pUlci5FKm4mrMAQ7Ia+kk3uwaQERwmafvUhSa0AxDgnuRz2R1yJ8oIB0uRNfaa1SZ2w==
+
+
       sqs:
         queue-url: https://sqs.us-east-1.amazonaws.com/206555216689/log-ingestion-queue  
-
 
   # Disable Spring Boot auto-config for services not in use
   autoconfigure:
     exclude:
       - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
 
-eureka:
-  client:
-    service-url:
-      defaultZone: https://log-analysis-service-registry.onrender.com/eureka
-    register-with-eureka: true
-    fetch-registry: true
-
-  instance:
-    prefer-ip-address: true
-    instance-id: ${spring.application.name}:${random.value}
-    
 # ─── Scheduler ────────────────────────────────────────────────────────────────
 log:
   scheduler:
-    batch-size: 500
+  
     cron: "*/30 * * * * *"
+  chunk-size: 100 
 
 # ─── Field Mapping ────────────────────────────────────────────────────────────
 field-mapping:
@@ -144,54 +138,54 @@ external:
     - name: otp-service
       url: https://hdfc-dataset-server-r6b1.vercel.app/logs/otp_service
       format: csv
-      threshold: 30
+      
 
     - name: kyc-service
       url: https://hdfc-dataset-server-r6b1.vercel.app/logs/kyc_service
       format: txt
-      threshold: 30
+      
 
     - name: card-service
       url: https://hdfc-dataset-server-r6b1.vercel.app/logs/card_service
       format: json
-      threshold: 30
+      
 
     - name: core-banking
       url: https://hdfc-dataset-server-r6b1.vercel.app/logs/core_banking
       format: json
-      threshold: 30
+      
 
     - name: customer-profile-service
       url: https://hdfc-dataset-server-r6b1.vercel.app/logs/customer_profile_service
       format: csv
-      threshold: 30
+      
 
     - name: document-service
       url: https://hdfc-dataset-server-r6b1.vercel.app/logs/document_service
       format: csv
-      threshold: 30
+      
 
     - name: logistics-service
       url: https://hdfc-dataset-server-r6b1.vercel.app/logs/logistics_service
       format: txt
-      threshold: 30
+      
 
     - name: credit-bureau-service
       url: https://hdfc-dataset-server-r6b1.vercel.app/logs/credit_bureau_service
       format: json
-      threshold: 30
+      
 
     - name: loan-portal
       url: https://hdfc-dataset-server-r6b1.vercel.app/logs/loan_portal
       format: csv
-      threshold: 30
+      
 
     - name: loan-origination-service
       url: https://hdfc-dataset-server-r6b1.vercel.app/logs/loan_origination_service
       format: txt
-      threshold: 30
+      
 
     - name: loan-disbursement-service
       url: https://hdfc-dataset-server-r6b1.vercel.app/logs/loan_disbursement_service
       format: csv
-      threshold: 30
+      
