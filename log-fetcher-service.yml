@@ -1,0 +1,185 @@
+server:
+  port: 8080
+
+spring:
+  web:
+    resources:
+      add-mappings: false
+
+  data:
+    redis:
+      host: redis-18449.crce217.ap-south-1-1.ec2.cloud.redislabs.com
+      port: 18449
+      password: xYc9wS9WbgmoBnfyX0Z2rgg507pITOqZ
+      ssl:
+        enabled: false
+      connect-timeout: 5000
+      timeout: 5000
+      lettuce:
+        pool:
+          max-active: 10
+          max-idle: 5
+          min-idle: 1
+          max-wait: 2000ms
+
+    mongodb:
+      uri: mongodb+srv://dassekhar2002_db_user:Chandra@loganalysis.adppuew.mongodb.net/HDFC_LOG_ANALYSIS?authSource=admin&retryWrites=true&w=majority
+      auto-index-creation: false   # Disabled — you manage indexes manually via MongoIndexConfig
+
+  cloud:
+    config:
+      import-check:
+        enabled: false
+
+
+    aws:
+      region: 
+        static: us-east-1
+      credentials:
+        access-key: ASIATAF5GPMYQZNLOVAE
+        secret-key: GkNQd5BS+5LQDu5Hy+PVLcNRzzru7nm5l1vVukMk
+        session-token: IQoJb3JpZ2luX2VjELj//////////wEaCXVzLXdlc3QtMiJIMEYCIQDlmYrU/fEu1qlxcLRwMzzvT3O/8iZfHTxQUmy8Dw2U4QIhAJ3l6/TKFcIBI+Quk73XDfCRbzbWHoCBZk58OzbPcoRcKrwCCIH//////////wEQABoMMjA2NTU1MjE2Njg5Igwv8etjY9ekVcDzHn4qkAK5QIE3JfTndMKkB7qSkZFfBlJbhsdKplSmu6gSDPnBAHL/nXp6cnKfduRxpsM1/x1BdIVoZvTq/TIKNIzzi+kCWf8ngaxVIdPzPjjKYhPKFtO/Rl6TTtmvqdfYElO5aby8DE/Rkqzh95H+07h/rl1qCCn51AVpgC6eqNqYQdQCYcNCTbMtCJr/g6BuEFgULsIWf8lTSK83PT/UjoAMAABvF+ne/fbsr+rTJuzNebJw8BOLWruyBkLV6Lzu0EEk+X/QJjOWIN+pyfb2znQDTKcCXHFAUcAjGEIcjmG44ihY0OdOL48HXgzd1BFHMDgQy/Z4Ip0UD338o7DGk8RXRjRZvKxvOqsk47Pmj3V1LO7mVjCb9ZTNBjqcAUHSnhVHGJ12tDW8lz/MI3WeTkTcqUAvC8piQ+xn033XxTGWOZmzfg+wxcQMPT9FsaMiTfMEF8BXKQTdslq1nxsI+rDFF3WTrYqzARpMj2zWj8ZemWiHwKEFn7DKbPKOzMz9Qz0juHrBnObxC8v4HmauHTsF8OKl8ZI8L+WhTD9xWRZjjjEmLhwZVtnk1jPp2WoTupHLJ6GGQeaOqQ==
+      sqs:
+        queue-url: https://sqs.us-east-1.amazonaws.com/206555216689/log-ingestion-queue  
+
+  # Disable Spring Boot auto-config for services not in use
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+
+# ─── Scheduler ────────────────────────────────────────────────────────────────
+log:
+  scheduler:
+    batch-size: 500
+    cron: "*/30 * * * * *"
+
+# ─── Field Mapping ────────────────────────────────────────────────────────────
+field-mapping:
+  header-mapping:
+    # logId variations
+    logid: logId
+    transactionid: logId
+    txnid: logId
+    id: logId
+
+    # correlation
+    correlationid: correlationId
+    corrid: correlationId
+
+    # journey
+    journeyid: journeyId
+    journeyname: journeyName
+    journeystatus: journeyStatus
+    journeycreatedat: journeyCreatedAt
+
+    # timestamp
+    timestamp: timestamp
+    eventtime: timestamp
+    time: timestamp
+    createdat: timestamp
+
+    # customer
+    customerid: customerId
+    userid: customerId
+    user: customerId
+
+    # event
+    event: event
+    eventtype: event
+
+    # status
+    status: status
+
+    # retry
+    retrycount: retryCount
+    retry: retryCount
+
+    # source
+    source: source
+    service: source
+    system: source
+
+    # errors
+    reason: reason
+    error: reason
+    errormessage: reason
+
+    errorcode: errorCode
+    code: errorCode
+
+  fetch:
+    fallback:
+      minutes: 60
+
+# ─── Actuator / Health ────────────────────────────────────────────────────────
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always
+  health:
+    redis:
+      enabled: true
+    db:
+      enabled: true
+
+# ─── External Log Sources ─────────────────────────────────────────────────────
+external:
+  sources:
+    - name: otp-service
+      url: https://hdfc-dataset-server-r6b1.vercel.app/logs/otp_service
+      format: csv
+      threshold: 30
+
+    - name: kyc-service
+      url: https://hdfc-dataset-server-r6b1.vercel.app/logs/kyc_service
+      format: txt
+      threshold: 30
+
+    - name: card-service
+      url: https://hdfc-dataset-server-r6b1.vercel.app/logs/card_service
+      format: json
+      threshold: 30
+
+    - name: core-banking
+      url: https://hdfc-dataset-server-r6b1.vercel.app/logs/core_banking
+      format: json
+      threshold: 30
+
+    - name: customer-profile-service
+      url: https://hdfc-dataset-server-r6b1.vercel.app/logs/customer_profile_service
+      format: csv
+      threshold: 30
+
+    - name: document-service
+      url: https://hdfc-dataset-server-r6b1.vercel.app/logs/document_service
+      format: csv
+      threshold: 30
+
+    - name: logistics-service
+      url: https://hdfc-dataset-server-r6b1.vercel.app/logs/logistics_service
+      format: txt
+      threshold: 30
+
+    - name: credit-bureau-service
+      url: https://hdfc-dataset-server-r6b1.vercel.app/logs/credit_bureau_service
+      format: json
+      threshold: 30
+
+    - name: loan-portal
+      url: https://hdfc-dataset-server-r6b1.vercel.app/logs/loan_portal
+      format: csv
+      threshold: 30
+
+    - name: loan-origination-service
+      url: https://hdfc-dataset-server-r6b1.vercel.app/logs/loan_origination_service
+      format: txt
+      threshold: 30
+
+    - name: loan-disbursement-service
+      url: https://hdfc-dataset-server-r6b1.vercel.app/logs/loan_disbursement_service
+      format: csv
+      threshold: 30
