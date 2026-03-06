@@ -39,9 +39,9 @@ spring:
       region: 
         static: us-east-1
       credentials:
-        access-key: ASIATAF5GPMYYONIANAQ
-        secret-key: tZqo3xGMVqcBL6J+dTTiSpqSwdm3mXRLKU+PNJnL
-        session-token: IQoJb3JpZ2luX2VjEPP//////////wEaCXVzLXdlc3QtMiJHMEUCIQCLG1G+OSDc9MhCushnlDltyjHT6mo2Ako9ef5uPLWCZgIgcoU2iHC/MnAys+bxgXlT0ftcRhJy8NvD0L/QRzIG08UqvAIIvP//////////ARAAGgwyMDY1NTUyMTY2ODkiDEjhYhG4iFK7V/0lqCqQAhNf/M4yEUB0aViJQ2akNiGr216Whv9vo1OT3UuyVjKWFZY+5aAOYBsT9ZQsUjxgP0bS1jtvdZWzMpQv21lLZdDdpaTsHI7pBfByi86uDKmk2EQllc9nGtvOUF5SXxHO9ic292FowkoB/6Lj7DVYWeBmxl5JE5K2uGskmLVbtwS8jCOXaqAz2Tu3kplneIrAildavD8ZA9dE5J0btDQLM+aY3nAaaE6+BtGsgbPlot5Wav0IJXkb8nSupouko0R/raUzTQjDnPqPTwh66bPepkSPsMNP9rvpNqBSlpKJpRNdWaJKnjNcYkcES2EYP470azCfbDZaqlPSP4UMuq51ueJZz2JJdnTjVGrDn+kEbGWAMP6Ios0GOp0Bo6XNteWInp5CaZLBfbGTn9dNlZK67Yao5QZfmfGIX1uDmUW6gphbOyjU7U+cjI1h+ovszYkXjCeY3MHD70YrwoOgR7LsyMbAExXhSDCmoW9/XPCkFxCyx8uzMoytCH9tMBeuqE0oJZnEyd6pUlci5FKm4mrMAQ7Ia+kk3uwaQERwmafvUhSa0AxDgnuRz2R1yJ8oIB0uRNfaa1SZ2w==
+        access-key: ASIATAF5GPMYXKJDFIIX
+        secret-key: uNcN22awJdDQ8FVM6SgWXwsqGcof4i5GLQJFTj3o
+        session-token: IQoJb3JpZ2luX2VjEB8aCXVzLXdlc3QtMiJHMEUCIHR1ljIlHhfsC0Xvhqn9oBNVdtXZzhBpqNAr5hX5IDVEAiEAtScMiXmhYxQ8WND/gHrF0b7WfRDCagGdqfVGShg5nRUqvAII6P//////////ARAAGgwyMDY1NTUyMTY2ODkiDLVvrqWvfp5mMQZvEiqQAv/VtCwwqtPkTZDs+2NcpKYTzYaMacBUK2S+hQ7bwkQKYTsmTmG9E3t3nYg3Kkw9aIhJC1ebESyEwhDhbvRIMBZpifVsqcmVYOZHAlqcsZuM+Bd7LHFddXH/JlrnflilmZAeUHeBZ9DF95gObNfHyUB7Z6maFhXNlnqpyCppmKmO4B7pbwgSdg0Qceb35SsAQR5LYn8W7r1ESBiwKN6M1qPYuk70NSXS6FL75uf0LAlJSuG1Wizxx4wf0qds8nqLKlZtQJlk1sjCCED89siIaoLEi/cQJ66r7dGo2hBEGgOn7edd4JdiboeOdTr1dmjwnjlx49HBoglB/YjkH0bOecL7yMrsIwp1MU8yAR9Aoc1lMLrKq80GOp0B/0V84AvDPN04AUmXvKe4u2zEY1gcWPmbjKVMXtXSgZE0eW4WNRZz5fxodhz3ATta5puSegXQPBidZ/F39SGD9xXDzPdRJSd/spRv+cVCIaKtHYjzZ1HdtTJjXIRvQdykm+oHxIx1ttM8K2qfXo0W1xJpuEYTNbuoEGeDLLnAxHUfMm1h5dyfvhtKGWaXBrnr8upuj4RKszeVO8IvwQ==
 
 
       sqs:
