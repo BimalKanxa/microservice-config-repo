@@ -192,7 +192,7 @@ external:
 eureka:
   client:
     service-url:
-      defaultZone: https://log-analysis-service-registry.onrender.com/eureka
+      defaultZone: http://45.126.125.153:8761/eureka
     register-with-eureka: true
     fetch-registry: true
 
